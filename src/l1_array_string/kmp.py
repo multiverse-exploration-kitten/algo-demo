@@ -28,8 +28,7 @@ def kmp_search(text, pattern):
             j += 1
 
         if j == len(pattern):
-            print("Found pattern at index " + str(i - j))
-            j = lps[j - 1]  # get the next j
+            return "Found pattern at index " + str(i - j)
 
         # mismatch after j matches
         elif i < len(text) and pattern[j] != text[i]:
