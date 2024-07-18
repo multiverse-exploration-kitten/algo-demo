@@ -1,0 +1,10 @@
+black==24.4.2
+click==8.1.7
+flake8==7.1.0
+mccabe==0.7.0
+mypy-extensions==1.0.0
+packaging==24.1
+pathspec==0.12.1
+platformdirs==4.2.2
+pycodestyle==2.12.0
+pyflakes==3.2.0
