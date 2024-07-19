@@ -6,7 +6,10 @@ from src.l1_array_string.basic_patterns import (
     max_sum_subarray,
     min_subarray_len,
     move_zeros,
+    partition_array,
     prefix_sum,
+    reverse_array,
+    rotate_array_k_times,
     subarray_sum,
     two_sum_sorted_arr,
 )
@@ -78,6 +81,63 @@ class TestBasicPatterns(unittest.TestCase):
         for nums, target, expected in test_cases:
             with self.subTest(nums=nums, target=target, expected=expected):
                 self.assertEqual(count_subarray_sum_for_target(nums, target), expected)
+
+    def test_partition_array(self):
+        test_cases = [
+            ([5, 1, 4, 2, 3], 3),
+            ([9, 12, 3, 5, 14, 10, 10], 10),
+            ([3, 3, 3, 3, 3], 3),
+            ([5, 2, 4, 7, 8, 1, 3], 5),
+            ([1, 2, 3, 4, 5], 6),
+            ([5, 4, 3, 2, 1], 0),
+            ([1, 1, 1, 1, 1, 1], 1),
+            ([1], 1),
+            ([], 5),
+        ]
+        for arr, pivot in test_cases:
+            with self.subTest(arr=arr, pivot=pivot):
+                result = partition_array(arr.copy(), pivot)
+                less_than_pivot = [x for x in result if x < pivot]
+                greater_equal_pivot = [x for x in result if x >= pivot]
+
+                # Check that all elements less than the pivot are on the left side
+                self.assertTrue(
+                    all(x < pivot for x in less_than_pivot),
+                    "Elements less than pivot are not correctly partitioned",
+                )
+
+                # Check that all elements greater than or equal to the pivot are on the right side
+                self.assertTrue(
+                    all(x >= pivot for x in greater_equal_pivot),
+                    "Elements greater than or equal to pivot are not correctly partitioned",
+                )
+
+                # Ensure the combined result matches the length of the original array
+                self.assertEqual(
+                    len(result),
+                    len(arr),
+                    "The result array does not have the same length as the input array",
+                )
+
+    def test_rotate_array_k_times(self):
+        test_cases = [
+            ([1, 2, 3, 4, 5], 2, [4, 5, 1, 2, 3]),
+            ([1, 2, 3, 4, 5], 5, [1, 2, 3, 4, 5]),
+            ([1, 2, 3, 4, 5], 7, [4, 5, 1, 2, 3]),
+        ]
+        for arr, k, expected in test_cases:
+            with self.subTest(arr=arr, k=k, expected=expected):
+                self.assertEqual(rotate_array_k_times(arr, k), expected)
+
+    def test_reverse_array(self):
+        test_cases = [
+            ([1, 2, 3, 4, 5], [5, 4, 3, 2, 1]),
+            ([1, 2, 3], [3, 2, 1]),
+            ([], []),
+        ]
+        for arr, expected in test_cases:
+            with self.subTest(arr=arr, expected=expected):
+                self.assertEqual(reverse_array(arr), expected)
 
 
 if __name__ == "__main__":
