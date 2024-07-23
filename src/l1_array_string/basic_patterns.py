@@ -113,3 +113,20 @@ def reverse_array(arr: List[int]) -> List[int]:
         left += 1
         right -= 1
     return arr
+
+
+def fetch_str_segment(s: str) -> List[str]:
+    result = []
+    for i in range(len(s)):
+        new_s = s[:i] + s[i + 1 :]
+        result.append(new_s)
+    return result
+
+
+def get_next_str(s: str) -> List[str]:
+    result = []
+    for i in range(len(s)):
+        for next_char in range(26):
+            new_s = s[:i] + chr(next_char + ord("a")) + s[i + 1 :]
+            result.append(new_s)
+    return result

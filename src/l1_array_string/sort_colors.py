@@ -1,7 +1,7 @@
 from typing import List
 
 
-def sortColors(self, nums: List[int]) -> None:
+def sort_colors(nums: List[int]) -> None:
     """
     Do not return anything, modify nums in-place instead.
     """
@@ -11,15 +11,15 @@ def sortColors(self, nums: List[int]) -> None:
     #            R
     #          p
 
-    left, right, pivot = 0, len(nums) - 1, 0
+    left, right, pivot_idx = 0, len(nums) - 1, 0
 
-    while pivot <= right:
-        if nums[pivot] == 0:
-            nums[left], nums[pivot] = nums[pivot], nums[left]
+    while pivot_idx <= right:
+        if nums[pivot_idx] == 0:
+            nums[left], nums[pivot_idx] = nums[pivot_idx], nums[left]
             left += 1
-            pivot += 1
-        elif nums[pivot] == 2:
-            nums[right], nums[pivot] = nums[pivot], nums[right]
+            pivot_idx += 1
+        elif nums[pivot_idx] == 2:
+            nums[right], nums[pivot_idx] = nums[pivot_idx], nums[right]
             right -= 1
         else:
-            pivot += 1
+            pivot_idx += 1
