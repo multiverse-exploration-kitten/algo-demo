@@ -21,12 +21,12 @@ class Solution:
         )
 
         i = j = mid + 1
-        for left_value in prefix_sum[left: mid + 1]:
+        for left_value in prefix_sum[left : mid + 1]:
             while i <= right and prefix_sum[i] - left_value < lower:
                 i += 1
             while j <= right and prefix_sum[j] - left_value <= upper:
                 j += 1
             count += j - i
 
-        prefix_sum[left: right + 1] = sorted(prefix_sum[left: right + 1])
+        prefix_sum[left : right + 1] = sorted(prefix_sum[left : right + 1])
         return count

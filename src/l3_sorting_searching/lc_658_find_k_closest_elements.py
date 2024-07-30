@@ -33,4 +33,4 @@ class Solution:
                 else:
                     lo += 1
 
-        return arr[lo: hi + 1]
+        return arr[lo : hi + 1]
