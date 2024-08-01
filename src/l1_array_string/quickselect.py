@@ -1,4 +1,3 @@
-# quick select
 from typing import List
 
 
@@ -17,9 +16,9 @@ def qs(arr: List[int], k: int, start: int, end: int) -> int:
     left, right = start, end
 
     while left <= right:
-        while left <= right and pivot > arr[left]:
+        while left <= right and arr[left] < pivot:
             left += 1
-        while left <= right and pivot < arr[right]:
+        while left <= right and arr[right] > pivot:
             right -= 1
 
         if left <= right:
@@ -28,8 +27,8 @@ def qs(arr: List[int], k: int, start: int, end: int) -> int:
             right -= 1
 
     if k <= right:
-        qs(arr, k, start, right)
+        return qs(arr, k, start, right)
     if k >= left:
-        qs(arr, k, left, end)
+        return qs(arr, k, left, end)
 
     return arr[k]
