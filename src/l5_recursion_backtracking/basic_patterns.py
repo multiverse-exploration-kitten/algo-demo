@@ -41,6 +41,71 @@ def reverse(nums, start, end):
         end -= 1
 
 
+# find target k equals combination of a list
+def combinations_allow_duplication(nums, k):
+    result = []
+    combinations_allow_duplication_helper(nums, k, [], result)
+    return result
+
+
+def combinations_allow_duplication_helper(nums, k, path, result):
+    if sum(path) > k:
+        return
+    if sum(path) == k:
+        result.append(path[:])
+        return
+
+    for i in range(len(nums)):
+        path.append(nums[i])
+        combinations_allow_duplication_helper(nums, k, path, result)
+        path.pop()
+
+
+# find target k equals combination of a list, use unique number
+def combinations_no_duplication(nums, k):
+    result = []
+    combinations_no_duplication_helper(nums, k, [], result)
+    return result
+
+
+def combinations_no_duplication_helper(nums, k, path, result):
+    if sum(path) > k:
+        return
+    if sum(path) == k:
+        result.append(path[:])
+        return
+
+    for i in range(len(nums)):
+        path.append(nums[i])
+        combinations_allow_duplication_helper(nums[:i] + nums[i + 1 :], k, path, result)
+        path.pop()
+
+
+# find target k equals combination of a list, use unique number
+def combinations_no_duplication_limit_path_length(k, limit):
+    nums = [i for i in range(1, 10)]
+    result = []
+    combinations_no_duplication_limit_path_length_helper(nums, k, [], result, limit)
+    return result
+
+
+def combinations_no_duplication_limit_path_length_helper(nums, k, path, result, limit):
+    if len(path) > limit:
+        return
+
+    if sum(path) > k:
+        return
+
+    if sum(path) == k:
+        result.append(path[:])
+        return
+
+    for i in range(len(nums)):
+        path.append(nums[i])
+        combinations_allow_duplication_helper(nums[:i] + nums[i + 1 :], k, path, result)
+        path.pop()
+
+
 # Generate all combinations of a list.
 def combinations(nums, k):
     result = []
@@ -170,3 +235,8 @@ def is_palindrome(s, left, right):
         left += 1
         right -= 1
     return True
+
+
+# another way to check palindrome
+# def is_palindrome(s):
+#     return s == s[::-1]
