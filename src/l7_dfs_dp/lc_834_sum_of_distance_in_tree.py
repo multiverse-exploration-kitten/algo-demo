@@ -51,7 +51,7 @@ class Solution(object):
                 # Add the child's sum of distances and size to the current node's sum
                 ans[node] += ans[child] + count[child]
 
-    def dfs2(self, node, parent, graph, count, ans, N):
+    def dfs2(self, node, parent, graph, count, ans, n):
         """
         Second DFS to propagate the sum of distances from the root to all other nodes.
         """
@@ -64,7 +64,7 @@ class Solution(object):
                 # - When moving from a parent to a child, subtract the size of the child's subtree (count[child])
                 #   from the parent's sum of distances, because those nodes are now further away by 1 unit.
                 # - Add (N - count[child]) to account for the rest of the tree that is now closer by 1 unit.
-                ans[child] = ans[node] - count[child] + N - count[child]
+                ans[child] = ans[node] - count[child] + n - count[child]
 
                 # Recursively perform DFS on the child node to propagate this calculation
-                self.dfs2(child, node, graph, count, ans, N)
+                self.dfs2(child, node, graph, count, ans, n)

@@ -14,7 +14,7 @@ def subsets(nums):
 # palindrome partitioning
 def dfs_partition(s, path, res):
     if not s:
-        res.append(path)
+        res.append(path[:])
         return
     for i in range(1, len(s) + 1):
         if s[:i] == s[:i][::-1]:
