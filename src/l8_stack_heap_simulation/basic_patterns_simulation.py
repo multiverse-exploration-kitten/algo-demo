@@ -3,22 +3,23 @@ from collections import Counter, deque
 
 
 # 1. Grid/Matrix Simulation: Game of Life
+def count_live_neighbors(r, c, rows, cols):
+    live_neighbors = 0
+    for i in range(r - 1, r + 2):
+        for j in range(c - 1, c + 2):
+            if (i == r and j == c) or i < 0 or j < 0 or i >= rows or j >= cols:
+                continue
+            if abs(board[i][j]) == 1:
+                live_neighbors += 1
+    return live_neighbors
+
+
 def game_of_life(board):
     rows, cols = len(board), len(board[0])
 
-    def count_live_neighbors(r, c):
-        live_neighbors = 0
-        for i in range(r - 1, r + 2):
-            for j in range(c - 1, c + 2):
-                if (i == r and j == c) or i < 0 or j < 0 or i >= rows or j >= cols:
-                    continue
-                if abs(board[i][j]) == 1:
-                    live_neighbors += 1
-        return live_neighbors
-
     for r in range(rows):
         for c in range(cols):
-            live_neighbors = count_live_neighbors(r, c)
+            live_neighbors = count_live_neighbors(r, c, rows, cols)
             if board[r][c] == 1 and (live_neighbors < 2 or live_neighbors > 3):
                 board[r][c] = -1  # -1 indicates the cell was live but now dead
             if board[r][c] == 0 and live_neighbors == 3:
@@ -80,6 +81,8 @@ def least_interval(tasks, n):
 
 
 # 4. Sequential Simulation: Robot Return to Origin
+# delta = [(0, 1), (0, -1), (1, 0), (-1, 0)]
+# delta_with_dir = [(0, 1, "R"), (0, -1, "L"), (1, 0, "D"), (-1, 0, "U")]
 def judge_circle(moves):
     x, y = 0, 0
     for move in moves:
