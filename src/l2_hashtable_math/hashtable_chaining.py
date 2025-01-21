@@ -37,9 +37,9 @@ class HashMapChaining:
             value: The value to be associated with the key.
         """
         index = self._hash(key)
-        for pair in self.table[index]:
+        for i, pair in enumerate(self.table[index]):
             if pair[0] == key:
-                pair = (key, value)
+                self.table[index][i] = (key, value)
                 return
         self.table[index].append((key, value))
 
